@@ -1,0 +1,13 @@
+package CustomSorting;
+
+import java.util.Comparator;
+
+import edbms.Employee;
+
+public class SortEmployeeByAge implements Comparator<Employee>
+{
+	public int compareTo(Employee a,Employee b)
+	{
+		return a.getAge()-b.getAge();
+	}
+}

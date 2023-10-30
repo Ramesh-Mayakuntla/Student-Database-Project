@@ -1,0 +1,14 @@
+package CustomSorting;
+
+import java.util.Comparator;
+
+import sdbms.Student;
+
+public class SortStudentsByMarks implements Comparator<Student>
+{
+	@Override
+	public int compare(Student s1,Student s2)
+	{
+		return (int)(s1.getMarks()-s2.getMarks());
+	}
+}

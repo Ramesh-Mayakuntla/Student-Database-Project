@@ -1,0 +1,74 @@
+package com;
+
+import java.util.Scanner;
+
+class Taxi
+{
+	
+}
+class Ola extends Taxi
+{
+	@Override
+	public String toString()
+	{
+		return "Ola Booked";
+	}
+}
+class Uber extends Taxi
+{
+	@Override
+	public String toString()
+	{
+		return "Uber Booked";
+	}
+}
+class Rapido extends Taxi
+{
+	@Override
+	public String toString()
+	{
+		return "Rapido Booked";
+	}
+}
+
+class Mobile
+{
+	Taxi selectApp(int choice)
+	{
+		if(choice==1)
+			return new Ola();
+		
+		else if(choice==2)
+			return new Uber();
+		
+		else if(choice==3)
+			return new Rapido();
+		
+		else
+			return null;
+	}
+}
+
+
+
+public class MainClass
+{
+	public static void main(String[] args)
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Welcome to Taxi Booking App");
+		
+		System.out.println("1.Ola\n2.Uber\n3.Rapido");
+		System.out.println("Enter your Choice");
+		int choice=sc.nextInt();
+		
+		Mobile mobile=new Mobile();
+		Taxi obj=mobile.selectApp(choice);
+		
+		if(obj!=null)
+			System.out.println(obj);
+		else
+			System.out.println("Invalid choice");
+		
+	}
+}

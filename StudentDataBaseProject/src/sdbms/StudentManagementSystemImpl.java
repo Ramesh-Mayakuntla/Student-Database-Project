@@ -1,0 +1,292 @@
+package sdbms;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+import CustomException.InvalidChoiceException;
+import CustomException.StudentNotFoundException;
+import CustomSorting.SortStudentByAge;
+import CustomSorting.SortStudentById;
+import CustomSorting.SortStudentsByMarks;
+import CustomSorting.SortStudentsByName;
+
+
+public class StudentManagementSystemImpl implements StudentManagementSystem
+{
+	//This is the Implementation class of StudentManagementSystem Interface.
+
+	Scanner sc=new Scanner(System.in);
+
+	Map<String,Student> db=new LinkedHashMap<String,Student>();			//We are using the Collections as DataBase
+
+
+	@Override
+	public void addStudent()
+	{
+		System.out.println("Enter Student age");						//Accepting Age
+		int age=sc.nextInt();
+		System.out.println("Enter Student name");						//Accepting Name
+		String name=sc.next();
+		System.out.println("Enter Student Marks");						//Accepting Marks
+		int marks=sc.nextInt();
+
+		Student std=new Student(age,name,marks);						//Creating Object Of Student
+		db.put(std.getId(), std);
+		System.out.println("Student Record Inserted Successfully");
+		System.out.println("Student Id is "+std.getId());				//Displaying the Student Id
+	}
+	@Override
+	public void displayStudent()
+	{
+		System.out.println("Enter Student Id to get Details");
+		String id=sc.next();											//1.Accepting Id from the user
+		id=id.toUpperCase();											//2.Converting into UpperCase
+		if(db.containsKey(id))											//3.Checking Whether the Id is present or not
+		{
+			Student std=db.get(id);										//4.Getting the Student Object
+			System.out.println("Student details are ");
+			System.out.println("Student id is "+std.getId());
+			System.out.println("Student Name is "+std.getName());
+			System.out.println("Students Marks are "+std.getMarks());
+			System.out.println("Student age is "+std.getAge());
+		}
+		else															//5.Else print Custom Exception
+		{
+			try
+			{
+				String message="Student not Found ";
+				throw new StudentNotFoundException(message);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+
+	}
+
+	@Override
+	public void  displayAllStudents()
+	{
+		if(db.size()>0)													//If the Size of database is >0 it shows Exception
+		{																//we have to handle it by Creating the customException class
+			System.out.println("Students Records are Follows");
+			System.out.println("----------------------------");
+			Set<String> keys=db.keySet();
+
+			for(String key:keys)
+			{
+				System.out.println(db.get(key));
+			}
+		}
+		else
+		{
+			try
+			{
+				String message="No Sufficient Student Records";
+				throw new StudentNotFoundException(message);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+	@Override
+	public void removeStudent()
+	{
+		System.out.println("Enter student id to get deleted ");
+		String id=sc.next();
+		id=id.toUpperCase();
+		if(db.containsKey(id))
+		{
+			db.remove(id);
+			System.out.println("Record deleted successfully");
+		}
+		else
+		{
+			try
+			{
+				String message=id+" is not found";
+				throw new StudentNotFoundException(message);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+	@Override
+	public void removeAllStudents()
+	{
+		if(db.size()>0)
+		{
+			db.clear();
+			System.out.println("Deleted all Students Successfully!!!!!!!!!!!!");
+		}
+		else
+		{
+			try
+			{
+				String message="There is no Student records to delete!!!!!";
+				throw new StudentNotFoundException(message);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+	@Override
+	public void updateStudent()
+	{
+		System.out.println("Enter the ID for Updation");
+		String id=sc.next().toUpperCase();
+		
+		if(db.containsKey(id))
+		{
+			boolean result=true;
+			while(result)
+			{
+			Student std=db.get(id);
+			System.out.println("Enter the updation details\n1.Update age\n2.Update name\3.Update Marks\n.4exit");
+		int choice=sc.nextInt();
+		
+		switch(choice)
+		{
+		case 1:System.out.println("Enter student age to get updated");
+				int age =sc.nextInt();
+				std.setAge(age);
+				System.out.println("Updation on age done Successfully");
+				System.out.println("student New Detils are as Follow:");
+				System.out.println(std);
+				break;
+		case 2:System.out.println("Enter Student name to get updated");
+				String name=sc.next();
+				std.setName(name);
+				System.out.println("Updation on Name done Successfully");
+				System.out.println("student New Detils are as Follow:");
+				System.out.println(std);
+				break;
+		case 3:System.out.println("Enter Marks to get Updated");
+				int marks=sc.nextInt();
+				std.setMarks(marks);
+				System.out.println("Updation on Marks done Successfully");
+				System.out.println("student New Detils are as Follow:");
+				System.out.println(std);
+				break;
+				
+		case 4:
+			result=false;
+		
+		default: 
+			try
+			{
+				String message="Invalid Choice";
+				throw new InvalidChoiceException(message);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		
+		}
+		}
+		}
+	}
+	@Override
+	public void countStudents()
+	{
+		System.out.println("Total Number of Students Records is "+db.size());
+	}
+	@Override
+	public void sortStudents()
+	{
+		// Convert Map into Set 
+		Set<String> keys=db.keySet();
+		//And Declare reference of list and object ArrayList to store Students
+		List<Student> list=new ArrayList<Student>();
+		
+		for(String key:keys)
+		{
+			list.add(db.get(key));  //Getting the Object From the map and Storing into the List.
+		}
+		
+		System.out.println("1.Sort Student by Name\n2.Sort Student by ID\n3.Sort Student By Marks\n4.Sort Students BY Age");
+		System.out.println("Enter Your Choice For Sorting");
+		int choice=sc.nextInt();
+		
+		switch(choice)
+		{
+		case 1:
+			Collections.sort(list, new SortStudentsByName());
+					display(list);
+			break;
+		case 2:Collections.sort(list, new SortStudentById());
+					display(list);
+			break;
+		case 3:Collections.sort(list, new SortStudentsByMarks());
+					display(list);
+			break;
+		case 4:Collections.sort(list, new SortStudentByAge());
+					display(list);
+			break;
+		default:
+			try
+			{
+				String message="Invalid Choice";
+				throw new InvalidChoiceException(message);
+				
+			}
+			catch (Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}	
+		
+	}
+	
+	//Helper Method for Traversing List(to reduce redundancy)
+	private static void display(List<Student> list)
+	{
+		for(Student s:list)
+			System.out.println(s);
+	}
+	
+	
+	@Override
+	public void findStudentWithHighestMarks()
+	{
+		Set<String> keys=db.keySet();
+		List<Student> list=new ArrayList<Student>();
+		
+		for(String key:keys)
+		{
+			list.add(db.get(key));
+		}
+		Collections.sort(list,new SortStudentsByMarks());
+		System.out.println("Student with Highest Marks is ");
+		System.out.println(list.get(list.size()-1));
+	}
+	@Override
+	public void findStudentWithLowestMarks()
+	{
+		Set<String> keys=db.keySet();
+		List<Student> list=new ArrayList<Student>();
+		
+		for(String key:keys)
+		{
+			list.add(db.get(key));
+		}
+		Collections.sort(list,new SortStudentsByMarks());
+		System.out.println("Student with Lowest Marks is ");
+		System.out.println(list.get(0));
+	}
+	
+
+}
+

@@ -1,0 +1,10 @@
+package CustomSorting;
+
+import java.util.Comparator;
+
+import example.Student;
+
+public class SortStudentByAge implements Comparator<Student>
+{
+	
+}

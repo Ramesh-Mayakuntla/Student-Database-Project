@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="java.util.LinkedHashMap"/>
+    <fullyQualifiedTypeName name="java.util.Set"/>
+    <fullyQualifiedTypeName name="CustomException.StudentNotFoundException"/>
+    <fullyQualifiedTypeName name="example.Student"/>
+    <fullyQualifiedTypeName name="edbms.Employee"/>
+    <fullyQualifiedTypeName name="java.util.Comparator"/>
+    <fullyQualifiedTypeName name="sdbms.Student"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="CustomSorting.SortStudentsByName"/>
+    <fullyQualifiedTypeName name="CustomSorting.SortStudentById"/>
+    <fullyQualifiedTypeName name="CustomSorting.SortStudentsByMarks"/>
+    <fullyQualifiedTypeName name="CustomSorting.SortStudentByAge"/>
+    <fullyQualifiedTypeName name="CustomException.InvalidChoiceException"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+</qualifiedTypeNameHistroy>

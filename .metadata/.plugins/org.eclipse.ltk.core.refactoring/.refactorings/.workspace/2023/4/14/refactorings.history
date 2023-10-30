@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename Java project &apos;Factory Design Factory&apos; to &apos;Factory Design Pattern&apos;&#x0D;&#x0A;- Original element: &apos;Factory Design Factory&apos;&#x0D;&#x0A;- Renamed element: &apos;Factory Design Factory&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename Java project &apos;Factory Design Factory&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=Factory Design Factory" name="Factory Design Pattern" references="true" stamp="1680756725749" version="1.0"/>
+</session>

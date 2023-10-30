@@ -1,0 +1,161 @@
+package sdbms;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import CustomException.StudentNotFoundException;
+
+
+public class StudentManagementSystemImpl implements StudentManagementSystem
+{
+	//This is the Implementation class of StudentManagementSystem Interface.
+
+	Scanner sc=new Scanner(System.in);
+
+	Map<String,Student> db=new LinkedHashMap<String,Student>();			//We are using the Collections as DataBase
+
+
+	@Override
+	public void addStudent()
+	{
+		System.out.println("Enter Student age");						//Accepting Age
+		int age=sc.nextInt();
+		System.out.println("Enter Student name");						//Accepting Name
+		String name=sc.next();
+		System.out.println("Enter Student Marks");						//Accepting Marks
+		int marks=sc.nextInt();
+
+		Student std=new Student(age,name,marks);						//Creating Object Of Student
+		db.put(std.getId(), std);
+		System.out.println("Student Record Inserted Successfully");
+		System.out.println("Student Id is "+std.getId());				//Displaying the Student Id
+	}
+	@Override
+	public void displayStudent()
+	{
+		System.out.println("Enter Student Id to get Details");
+		String id=sc.next();											//1.Accepting Id from the user
+		id=id.toUpperCase();											//2.Converting into UpperCase
+		if(db.containsKey(id))											//3.Checking Whether the Id is present or not
+		{
+			Student std=db.get(id);										//4.Getting the Student Object
+			System.out.println("Student details are ");
+			System.out.println("Student id is "+std.getId());
+			System.out.println("Student Name is "+std.getName());
+			System.out.println("Students Marks are "+std.getMarks());
+			System.out.println("Student age is "+std.getAge());
+		}
+		else															//5.Else print Custom Exception
+		{
+			try
+			{
+				String message="Student not Found ";
+				throw new StudentNotFoundException(message);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+
+	}
+
+	@Override
+	public void  displayAllStudents()
+	{
+		if(db.size()>0)													//If the Size of database is >0 it shows Exception
+		{																//we have to handle it by Creating the customException class
+			System.out.println("Students Records are Follows");
+			System.out.println("----------------------------");
+			Set<String> keys=db.keySet();
+
+			for(String key:keys)
+			{
+				System.out.println(db.get(key));
+			}
+		}
+		else
+		{
+			try
+			{
+				String message="No Sufficient Student Records";
+				throw new StudentNotFoundException(message);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+	@Override
+	public void removeStudent()
+	{
+		System.out.println("Enter student id to get deleted ");
+		String id=sc.next();
+		id=id.toUpperCase();
+		if(db.containsKey(id))
+		{
+			db.remove(id);
+		}
+		else
+		{
+			try
+			{
+				String message=id+" record is deleted";
+				throw new StudentNotFoundException(message);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+	@Override
+	public void removeAllStudents()
+	{
+		if(db.size()>0)
+		{
+			db.clear();
+			System.out.println("Deleted all Students Successfully!!!!!!!!!!!!");
+		}
+		else
+		{
+			try
+			{
+				String message="There is no Student records to delete!!!!!";
+				throw new StudentNotFoundException(message);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+	@Override
+	public void updateStudent()
+	{
+
+	}
+	@Override
+	public void countStudents()
+	{
+		System.out.println("Total Number of Students Records is "+db.size());
+	}
+	@Override
+	public void sortStudents()
+	{
+
+	}
+	@Override
+	public void findStudentWithHighestMarks()
+	{
+
+	}
+	@Override
+	public void findStudentWithLowestMarks()
+	{
+
+	}
+
+}
+

@@ -1,0 +1,78 @@
+package com;
+import java.util.Scanner;
+
+class Food
+{
+	
+}
+class Dosa extends Food
+{
+	
+}
+class Idly extends Food
+{
+	
+}
+class LemonRice extends Food
+{
+	
+}
+class Poori extends Food
+{
+	
+}
+class Chapati extends Food
+{
+	
+}
+class Pongal extends Food
+{
+	
+}
+class Hotel
+{
+	Food orderFood(int choice)
+	{
+		if(choice ==1)
+		{
+		Dosa d=new Dosa();
+		return d;
+		}
+		else if(choice==2)
+		{
+			Idly i=new Idly();
+			return i;
+		}
+		else if(choice==3)
+		{
+			LemonRice l=new LemonRice();
+			return l;
+		}
+		else if(choice==4)
+		{
+			Poori p=new Poori();
+			return p;
+		}
+		else if(choice==5)
+		{
+			Chapati c=new Chapati();
+			return c;
+		}
+		else if(choice==6)
+		{
+			Pongal po=new Pongal();
+			return po;
+		}
+		else
+		{
+			return null;
+		}
+		
+	}
+	
+}
+public class Solution
+{
+	Scanner sc=new Scanner(System.in);
+	
+}
